@@ -13,33 +13,42 @@ import IdToEng from "./screens/IdToEng";
 import SplashScreen from "./screens/SplashScreen";
 import SearchBar from "./screens/SearchBar";
 
-var tempPayload = [];
+var tempPayloadEngToId = [];
+var tempPayloadIdToEng = [];
 var isETIActive = true;
 
 const setActiveETI = () => {
-	tempPayload = [];
-	isETIActive = true;
+	if (!isETIActive) {
+		isETIActive = true;
+	}
 }
 
 const notSetActiveETI = () => {
-	tempPayload = [];
-	isETIActive = false;
+	if (isETIActive) {
+		isETIActive = false;
+	}
 }
 
 const search = (keyword) => {
-	tempPayload = [{key: 1, title: keyword, subtitle: "hello"}, {key: 2, title: keyword, subtitle: "hello2"}];
+	if  (isETIActive) {
+		tempPayloadIdToEng = [];
+		tempPayloadEngToId = [{key: 1, title: keyword, subtitle: "hello"}, {key: 2, title: keyword, subtitle: "hello2"}];
+	} else {
+		tempPayloadEngToId = [];
+		tempPayloadIdToEng = [{key: 1, title: keyword, subtitle: "hello3"}, {key: 2, title: keyword, subtitle: "hello4"}];
+	}
 }
 
 const retrieveDataETI = (payload) => {
 	if (isETIActive)
-		return tempPayload;
+		return tempPayloadEngToId;
 
 	return [];
 }
 
 const retrieveDataITE = (payload) => {
 	if (!isETIActive)
-		return tempPayload;
+		return tempPayloadIdToEng;
 
 	return [];
 }
